@@ -1,0 +1,12 @@
+test1:
+  url: jdbc:mysql://....:110/database1?characterEncoding=UTF-8
+  username: root
+  password:
+  driverClassName: com.mysql.jdbc.Driver
+test2:
+  url: jdbc:mysql://....:110/database2?characterEncoding=UTF-8
+  username: root
+  password:
+  driverClassName: com.mysql.jdbc.Driver
+server:
+  port: 8000
