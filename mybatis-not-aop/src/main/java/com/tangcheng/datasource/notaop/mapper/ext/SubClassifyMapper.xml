@@ -1,0 +1,90 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.tangcheng.datasource.notaop.mapper.ext.SubClassifyMapper" >
+  <resultMap id="BaseResultMap" type="com.tangcheng.datasource.notaop.model.SubClassify" >
+    <id column="id" property="id" jdbcType="CHAR" />
+    <result column="name" property="name" jdbcType="VARCHAR" />
+    <result column="classify_no" property="classifyNo" jdbcType="VARCHAR" />
+    <result column="usr_org" property="usrOrg" jdbcType="VARCHAR" />
+  </resultMap>
+  <sql id="Base_Column_List" >
+    id, name, classify_no, usr_org
+  </sql>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.String" >
+    select 
+    <include refid="Base_Column_List" />
+    from cms_sub_classify
+    where id = #{id,jdbcType=CHAR}
+  </select>
+
+  <select id="getClassifyByNo" parameterType="java.lang.String" resultMap="BaseResultMap">
+    select
+    <include refid="Base_Column_List" />
+    from cms_sub_classify
+    where classify_no=#{usrOrg}
+  </select>
+
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.String" >
+    delete from cms_sub_classify
+    where id = #{id,jdbcType=CHAR}
+  </delete>
+  <insert id="insert" parameterType="com.tangcheng.datasource.notaop.model.SubClassify" >
+    insert into cms_sub_classify (id, name, classify_no, 
+      usr_org)
+    values (#{id,jdbcType=CHAR}, #{name,jdbcType=VARCHAR}, #{classifyNo,jdbcType=VARCHAR}, 
+      #{usrOrg,jdbcType=VARCHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="com.tangcheng.datasource.notaop.model.SubClassify" >
+    insert into cms_sub_classify
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        id,
+      </if>
+      <if test="name != null" >
+        name,
+      </if>
+      <if test="classifyNo != null" >
+        classify_no,
+      </if>
+      <if test="usrOrg != null" >
+        usr_org,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        #{id,jdbcType=CHAR},
+      </if>
+      <if test="name != null" >
+        #{name,jdbcType=VARCHAR},
+      </if>
+      <if test="classifyNo != null" >
+        #{classifyNo,jdbcType=VARCHAR},
+      </if>
+      <if test="usrOrg != null" >
+        #{usrOrg,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.tangcheng.datasource.notaop.model.SubClassify" >
+    update cms_sub_classify
+    <set >
+      <if test="name != null" >
+        name = #{name,jdbcType=VARCHAR},
+      </if>
+      <if test="classifyNo != null" >
+        classify_no = #{classifyNo,jdbcType=VARCHAR},
+      </if>
+      <if test="usrOrg != null" >
+        usr_org = #{usrOrg,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where id = #{id,jdbcType=CHAR}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.tangcheng.datasource.notaop.model.SubClassify" >
+    update cms_sub_classify
+    set name = #{name,jdbcType=VARCHAR},
+      classify_no = #{classifyNo,jdbcType=VARCHAR},
+      usr_org = #{usrOrg,jdbcType=VARCHAR}
+    where id = #{id,jdbcType=CHAR}
+  </update>
+</mapper>

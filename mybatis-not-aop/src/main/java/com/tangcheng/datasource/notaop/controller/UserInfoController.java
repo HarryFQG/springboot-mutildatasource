@@ -38,12 +38,14 @@ public class UserInfoController {
         return userDetailMapper.listUserDetail();
     }
 
-    @PostConstruct
+   // @PostConstruct
     public void a(){
         List<UserInfo> userInfos = userInfoMapper.listUserInfo();
         List<UserDetail> userDetails = userDetailMapper.listUserDetail();
         System.out.println(userInfos+"----------------------"+userDetails);
     }
+
+
 
 
 }

@@ -1,0 +1,97 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.tangcheng.datasource.notaop.mapper.ext.SubRelationMapper" >
+  <resultMap id="BaseResultMap" type="com.tangcheng.datasource.notaop.model.SubRelation" >
+    <id column="id" property="id" jdbcType="VARCHAR" />
+    <result column="sub_id" property="subId" jdbcType="VARCHAR" />
+    <result column="parent_id" property="parentId" jdbcType="VARCHAR" />
+    <result column="relative" property="relative" jdbcType="VARCHAR" />
+  </resultMap>
+  <sql id="Base_Column_List" >
+    id, sub_id, parent_id, relative
+  </sql>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.String" >
+    select 
+    <include refid="Base_Column_List" />
+    from cms_sub_relation
+    where id = #{id,jdbcType=VARCHAR}
+  </select>
+  <select id="likeRelativeByParentId" resultMap="BaseResultMap" parameterType="java.lang.String">
+    select
+    <include refid="Base_Column_List" />
+    from cms_sub_relation
+    where relative like "%"#{id}"%"
+  </select>
+
+  <update id="batchPrimaryKey" parameterType="java.util.List" >
+    <foreach close=";" collection="list" index="index" item="relation" open="" separator=";">
+      update cms_sub_relation set relative=#{relation.relative}
+      where id=#{relation.id}
+    </foreach>
+  </update>
+
+
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.String" >
+    delete from cms_sub_relation
+    where id = #{id,jdbcType=VARCHAR}
+  </delete>
+  <insert id="insert" parameterType="com.tangcheng.datasource.notaop.model.SubRelation" >
+    insert into cms_sub_relation (id, sub_id, parent_id, 
+      relative)
+    values (#{id,jdbcType=VARCHAR}, #{subId,jdbcType=VARCHAR}, #{parentId,jdbcType=VARCHAR}, 
+      #{relative,jdbcType=VARCHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="com.tangcheng.datasource.notaop.model.SubRelation" >
+    insert into cms_sub_relation
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        id,
+      </if>
+      <if test="subId != null" >
+        sub_id,
+      </if>
+      <if test="parentId != null" >
+        parent_id,
+      </if>
+      <if test="relative != null" >
+        relative,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        #{id,jdbcType=VARCHAR},
+      </if>
+      <if test="subId != null" >
+        #{subId,jdbcType=VARCHAR},
+      </if>
+      <if test="parentId != null" >
+        #{parentId,jdbcType=VARCHAR},
+      </if>
+      <if test="relative != null" >
+        #{relative,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.tangcheng.datasource.notaop.model.SubRelation" >
+    update cms_sub_relation
+    <set >
+      <if test="subId != null" >
+        sub_id = #{subId,jdbcType=VARCHAR},
+      </if>
+      <if test="parentId != null" >
+        parent_id = #{parentId,jdbcType=VARCHAR},
+      </if>
+      <if test="relative != null" >
+        relative = #{relative,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where id = #{id,jdbcType=VARCHAR}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.tangcheng.datasource.notaop.model.SubRelation" >
+    update cms_sub_relation
+    set sub_id = #{subId,jdbcType=VARCHAR},
+      parent_id = #{parentId,jdbcType=VARCHAR},
+      relative = #{relative,jdbcType=VARCHAR}
+    where id = #{id,jdbcType=VARCHAR}
+  </update>
+</mapper>

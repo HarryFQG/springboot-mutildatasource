@@ -1,12 +1,12 @@
 test1:
-  url: jdbc:mysql://....:110/database1?characterEncoding=UTF-8
+  url: jdbc:mysql://139.199.210.247:3306/database1?characterEncoding=utf8&allowMultiQueries=true&useSSL=false
   username: root
-  password:
+  password: 123456
   driverClassName: com.mysql.jdbc.Driver
 test2:
-  url: jdbc:mysql://....:110/database2?characterEncoding=UTF-8
+  url: jdbc:mysql://139.199.210.247:3306/database2?characterEncoding=utf8&allowMultiQueries=true&useSSL=false
   username: root
-  password:
+  password: 123456
   driverClassName: com.mysql.jdbc.Driver
 server:
   port: 8000
